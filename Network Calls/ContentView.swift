@@ -16,7 +16,16 @@ struct ContentView: View {
         
         VStack {
             Image(systemName: "ПИДОРАС")
+            Image(systemName: "ПИДОРАС")
+            Image(systemName: "ПИДОРАС")
+            Image(systemName: "ПИДОРАС")
+             
+            HStack {
                 
+                Image("")
+                Text("Hi")
+                Text("Hi")
+            }
         }
     }
 }
@@ -26,3 +35,5 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+
+
