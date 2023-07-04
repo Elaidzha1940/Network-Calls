@@ -31,6 +31,13 @@ struct ContentView: View {
         }
         .padding()
     }
+    
+    func getUser() async throws -> GitHubUser {
+    
+        let endpoint = "https://api.github.com/users/Elaidzha1940"
+        
+        let (data, response) = try await URLSession.shared.data(from: <#T##URL#>)
+    }
 }
 
 struct ContentView_Previews: PreviewProvider {
@@ -39,4 +46,10 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 
+struct GitHubUser: Codable {
+    
+    let login: String
+    let avatar_url: String
+    let bio: String
+}
 
