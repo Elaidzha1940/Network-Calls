@@ -15,18 +15,21 @@ struct ContentView: View {
     var body: some View {
         
         VStack {
-            Image(systemName: "ПИДОРАС")
-            Image(systemName: "ПИДОРАС")
-            Image(systemName: "ПИДОРАС")
-            Image(systemName: "ПИДОРАС")
-             
-            HStack {
-                
-                Image("")
-                Text("Hi")
-                Text("Hi")
-            }
+    
+            Circle()
+                .foregroundColor(.gray.opacity(0.6))
+                .frame(width: 150, height: 150)
+            
+            Text("Username")
+                .bold()
+                .font(.title3)
+            
+            Text("Github")
+                .padding()
+            
+            Spacer()
         }
+        .padding()
     }
 }
 
