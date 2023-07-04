@@ -36,7 +36,9 @@ struct ContentView: View {
     
         let endpoint = "https://api.github.com/users/Elaidzha1940"
         
-        let (data, response) = try await URLSession.shared.data(from: <#T##URL#>)
+        guard let url = URL(string: endpoint) else { throw Error }
+                
+        let (data, response) = try await URLSession.shared.data(from: url)
     }
 }
 
@@ -53,3 +55,6 @@ struct GitHubUser: Codable {
     let bio: String
 }
 
+enum GHError {
+    
+}
