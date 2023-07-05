@@ -36,7 +36,9 @@ struct ContentView: View {
     
         let endpoint = "https://api.github.com/users/Elaidzha1940"
         
-        guard let url = URL(string: endpoint) else { throw Error }
+        guard let url = URL(string: endpoint) else {
+            throw GHError.invalidURL
+        }
                 
         let (data, response) = try await URLSession.shared.data(from: url)
     }
@@ -55,6 +57,7 @@ struct GitHubUser: Codable {
     let bio: String
 }
 
-enum GHError {
+enum GHError: Error {
     
+    case invalidURL
 }
