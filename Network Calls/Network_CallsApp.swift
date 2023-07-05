@@ -1,9 +1,11 @@
+//  /*
 //
-//  Network_CallsApp.swift
-//  Network Calls
+//  Project: Network Calls
+//  File: Network_CallsApp.swift
+//  Created by: Elaidzha Shchukin
+//  Data: 03.07.2023
 //
-//  Created by Elaidzha Shchukin on 03.07.2023.
-//
+//  */
 
 import SwiftUI
 

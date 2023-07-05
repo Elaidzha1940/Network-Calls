@@ -16,20 +16,39 @@ struct ContentView: View {
         
         VStack {
     
+            AsyncImage(url: URL(string: user.avatarUrl ?? "")) { <#Image#> in
+                <#code#>
+            } placeholder: {
+                <#code#>
+            }
+
             Circle()
                 .foregroundColor(.gray.opacity(0.6))
                 .frame(width: 150, height: 150)
             
-            Text("Username")
+            Text(user?.login ?? "Login Placeholder")
                 .bold()
                 .font(.title3)
             
-            Text("Github")
+            Text(user?.bio ?? "Bio Placeholder")
                 .padding()
             
             Spacer()
         }
         .padding()
+        .task {
+            do {
+                user = try await getUser()
+            } catch GHError.invalidURL{
+                print("invalid URL")
+            } catch GHError.invaliResponse {
+                print("invalid response")
+            } catch GHError.invalidData {
+                print("invalid data")
+            } catch {
+                print("unexpected error")
+            }
+        }
     }
     
     func getUser() async throws -> GitHubUser {
@@ -51,7 +70,7 @@ struct ContentView: View {
             decoder.keyDecodingStrategy = .convertFromSnakeCase
             return try decoder.decode(GitHubUser.self, from: data)
         } catch {
-            
+            throw GHError.invalidData
         }
     }
 }
@@ -73,4 +92,5 @@ enum GHError: Error {
     
     case invalidURL
     case invaliResponse
+    case invalidData
 }
