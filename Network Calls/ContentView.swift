@@ -5,37 +5,43 @@
 //  Created by: Elaidzha Shchukin
 //  Date: 03.07.2023
 //
-//  S
+//  Status | Complited
 //
 //  */
 
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var user: GitHubUser?
     var body: some View {
         
-        VStack {
-    
-            AsyncImage(url: URL(string: user.avatarUrl ?? "")) { <#Image#> in
-                <#code#>
-            } placeholder: {
-                <#code#>
-            }
-
-            Circle()
-                .foregroundColor(.gray.opacity(0.6))
+        ZStack {
+            Color.gray.opacity(0.7)
+            VStack{
+                AsyncImage(url: URL(string: user?.avatarUrl ?? "")) { image in
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .clipShape(Circle())
+                } placeholder: {
+                    Circle()
+                        .foregroundColor(.gray.opacity(0.6))
+                }
                 .frame(width: 150, height: 150)
-            
-            Text(user?.login ?? "Login Placeholder")
-                .bold()
-                .font(.title3)
-            
-            Text(user?.bio ?? "Bio Placeholder")
-                .padding()
-            
-            Spacer()
+                
+                Text(user?.login ?? "Login Placeholder")
+                    .bold()
+                    .font(.title3)
+                
+                Text(user?.bio ?? "Bio Placeholder")
+                    .padding()
+                
+                Spacer()
+            }
+            .padding(.top, 70)
         }
-        .padding()
+        .ignoresSafeArea()
         .task {
             do {
                 user = try await getUser()
@@ -53,7 +59,7 @@ struct ContentView: View {
     
     func getUser() async throws -> GitHubUser {
         
-        let endpoint = "https://api.github.com/users/Elaidzha1940"
+        let endpoint = "https://api.github.com/users/elaidzha1940"
         
         guard let url = URL(string: endpoint) else {
             throw GHError.invalidURL
